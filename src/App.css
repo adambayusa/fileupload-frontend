@@ -1,0 +1,360 @@
+.App {
+  text-align: center;
+  padding: 0 2rem; /* Add 2rem padding to the left and right */
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Base table styles */
+.table-common {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.table-common th,
+.table-common td {
+  padding: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Common table styles */
+.table-base {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 20px 0;
+}
+
+.table-base th,
+.table-base td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Table layout */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-top: 20px;
+}
+
+/* Column widths */
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Size column */
+table th:nth-child(2),
+table td:nth-child(2) {
+  min-width: 100px;
+  width: 100px;
+}
+
+/* Last Modified column */
+table th:nth-child(3),
+table td:nth-child(3) {
+  min-width: 180px;
+  width: 180px;
+}
+
+/* Actions column (existing style) */
+table th:last-child,
+table td:last-child {
+  min-width: 250px;
+  width: 250px;
+}
+
+/* Description column (allows it to take remaining space) */
+table th:nth-child(4),
+table td:nth-child(4) {
+  min-width: 150px;
+}
+
+table input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone.active {
+  border-color: #4CAF50;
+  background-color: #f8fff8;
+}
+
+.file-types {
+  font-size: 12px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.file-input-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.choose-files-button {
+  display: inline-block;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.cancel-button,
+.upload-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;  /* Increased from default */
+  min-height: 32px;
+  white-space: nowrap;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+  min-width: 90px;  /* Ensure enough space for text */
+}
+
+.upload-button {
+  background-color: #4CAF50;
+  color: white;
+  min-width: 110px;  /* Ensure enough space for text */
+}
+
+/* Hover states */
+.cancel-button:hover {
+  background-color: #ff1a1a;
+}
+
+.upload-button:hover {
+  background-color: #45a049;
+}
+
+/* Disabled state */
+.cancel-button:disabled,
+.upload-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Selected Files container and table */
+.selected-files-container {
+  width: 100%;
+  position: relative;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.selected-files-table {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  min-width: 1000px;  /* Increased from 900px to match content width */
+}
+
+/* Update Selected Files Table column widths */
+.selected-files-table th:nth-child(1) { 
+  width: 300px;
+  min-width: 300px;  /* Added to prevent column collapse */
+}  /* File Name */
+.selected-files-table th:nth-child(2) { width: 100px; }  /* Size */
+.selected-files-table th:nth-child(3) { width: auto; }   /* Description */
+.selected-files-table th:nth-child(4),
+.selected-files-table td:nth-child(4) { 
+  width: 160px;      /* Reduced from 200px */
+  min-width: 160px;  /* Same as width */
+  white-space: nowrap;
+}
+
+.selected-files-action {
+  display: flex;
+  gap: 8px;
+}
+
+.selected-files-action button {
+  min-height: 32px;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.selected-files-container {
+  width: 100%;
+  position: relative;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.selected-files-container table {
+  composes: table-common;
+}
+
+/* Spinner styles */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px; /* Add space between text and spinner */
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  border-top-color: #000;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  gap: 6px;  /* Reduced from 8px */
+  align-items: center;
+}
+
+/* Common button styles */
+.action-buttons button {
+  min-height: 32px;  /* Increased for better proportion with larger text */
+  padding: 6px 12px;  /* Adjusted padding for larger text */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;   /* Increased from 13px to 16px */
+  white-space: nowrap;
+}
+
+/* Adjust button widths for larger text */
+.add-description-button {
+  background-color: #4CAF50;
+  color: white;
+  min-width: 110px;  /* Increased to accommodate larger text */
+}
+
+.add-description-button:hover {
+  background-color: #45a049;
+}
+
+/* Delete and discard button styles */
+.delete-button,
+.discard-button {
+  background-color: #ff4444;
+  color: white;
+  min-width: 80px;  /* Increased to accommodate larger text */
+}
+
+.delete-button:hover,
+.discard-button:hover {
+  background-color: #cc0000;
+}
+
+/* Disabled state */
+.action-buttons button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* File name styles */
+.file-name {
+  cursor: pointer;
+  color: #2196F3;
+  text-decoration: underline;
+}
+
+.file-name:hover {
+  color: #1976D2;
+}
+
+.active-download {
+  color: #4CAF50;
+  transition: color 0.2s ease;
+}
+
+.download-timer {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+.table-container {
+  width: 100%;
+  position: relative;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  -webkit-overflow-scrolling: touch;
+}
