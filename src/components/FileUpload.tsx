@@ -48,10 +48,12 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFilesSelect }) => {
         )}
       </div>
       <div className="file-input-container">
-        <input
-          type="file"
+        <input 
+          type="file" 
           multiple
-          onChange={handleFileChange}
+          aria-label="Choose files" 
+          data-testid="file-input"
+          onChange={handleFileChange} 
           className="choose-files-button"
           accept={acceptedExtensions.join(',')}
         />

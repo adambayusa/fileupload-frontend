@@ -45,6 +45,7 @@ const SelectedFiles: React.FC<SelectedFilesProps> = ({
               <td>
                 <div className="action-buttons">
                   <button
+                  data-testid="description-button"
                     className="add-description-button"
                     onClick={() => onAddDescription(fileObj.file.name, true)}
                     disabled={isUploading}

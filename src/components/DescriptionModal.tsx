@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/DescriptionModal.css';
 
 interface DescriptionModalProps {
@@ -16,7 +16,7 @@ const DescriptionModal: React.FC<DescriptionModalProps> = ({
   onSave,
   onClose,
 }) => {
-  const [value, setValue] = React.useState(description);
+  const [value, setValue] = useState(description);
 
   // Reset value when fileName changes
   useEffect(() => {

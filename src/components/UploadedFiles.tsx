@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { FileData } from '../types/types';
 
@@ -9,48 +9,64 @@ interface UploadedFilesProps {
   onDelete: (fileKey: string) => void;
 }
 
+interface Adam {
+  files : FileData[]
+  fileKey : string | number
+  descr: (x: number, y: boolean, callback: (result: string) => void) => (z: string) => string;
+}
+interface Fun{
+  var1: number | string;
+  var2: string | null;
+  fn: (var1: number) => void;
+}
+
+type FunArgs = {
+  var1: number | string;
+  var2?: string | null;
+  fn: (var1: string | number) => void;
+};
+
+const fun1 = (arg: FunArgs): string => {
+  const { var1, var2, fn } = arg;
+  const a = fn(var1);
+  return (var2 ?? '') + var1;
+};
+const fun0=(var1:number | string, var2:string | null, fn:(var1:number)=> void):number=>{
+  return 1;
+}
+const fun2=(arg:Fun)=>{
+  const { var1, var2, fn } = arg;
+ 
+  return (var2 ?? '') + var1;
+}
+
+
+const DepenFiles: React.FC<Adam> = ({ files, fileKey, descr }) => {
+  return (
+    <div>
+      <p>DepenFiles component is under construction.</p>
+    </div>
+  );
+};
+
 const UploadedFiles: React.FC<UploadedFilesProps> = ({
   files,
   loadingFileKey,
   onAddDescription,
   onDelete,
 }) => {
-  const [activeDownloads, setActiveDownloads] = useState<{ [key: string]: boolean }>({});
-  const [downloadTimers, setDownloadTimers] = useState<{ [key: string]: NodeJS.Timeout }>({});
-
   const handleFileClick = async (fileKey: string) => {
     try {
-      // Clear existing timer if any
-      if (downloadTimers[fileKey]) {
-        clearTimeout(downloadTimers[fileKey]);
-      }
-
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/files/${fileKey}/download`);
-
-      // Set active download and create link
-      setActiveDownloads((prev) => ({ ...prev, [fileKey]: true }));
-
+      
       // Open in new tab
       window.open(response.data.url, '_blank');
 
-      // Set timer to clear active status
-      const timer = setTimeout(() => {
-        setActiveDownloads((prev) => ({ ...prev, [fileKey]: false }));
-      }, 30000);
-
-      setDownloadTimers((prev) => ({ ...prev, [fileKey]: timer }));
     } catch (error) {
       console.error('Error getting download link:', error);
       alert('Failed to generate download link');
     }
   };
-
-  // Cleanup timers on unmount
-  useEffect(() => {
-    return () => {
-      Object.values(downloadTimers).forEach((timer) => clearTimeout(timer));
-    };
-  }, [downloadTimers]);
 
   return (
     <div className="table-container">
@@ -72,7 +88,7 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({
                 <tr key={file.key}>
                   <td>
                     <span
-                      className={`file-name ${activeDownloads[file.key] ? 'active-download' : ''}`}
+                      className="file-name"
                       onClick={() => handleFileClick(file.key)}
                     >
                       {file.key}
@@ -86,12 +102,14 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({
                   <td>
                     <div className="action-buttons">
                       <button
+                      data-testid="description-button"
                         className="add-description-button"
                         onClick={() => onAddDescription(file.key, false)}
                       >
                         {file.description ? 'Edit' : 'Add'} Description
                       </button>
                       <button
+                      data-testid="delete-button"
                         className="delete-button"
                         onClick={() => onDelete(file.key)}
                         disabled={loadingFileKey === file.key}
